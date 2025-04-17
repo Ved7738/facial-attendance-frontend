@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../config';  // use '../config' or './config' based on file location
+
 
 const AddEmployeeForm = () => {
   const [name, setName] = useState('');
@@ -55,14 +57,14 @@ const AddEmployeeForm = () => {
 
       // Step 1: Get Embeddings
       const embeddingRes = await axios.post(
-        'http://127.0.0.1:5000/extract-embeddings',
+        '${BASE_URL}/extract-embeddings',
         { image },
         { withCredentials: true }
       );
       const { face_embeddings, iris_embeddings } = embeddingRes.data;
 
       // Step 2: Save employee
-      await axios.post('http://127.0.0.1:5000/add-employee', {
+      await axios.post('${BASE_URL}/add-employee', {
         name,
         designation,
         face_embeddings: face_embeddings[0],  // <-- flatten

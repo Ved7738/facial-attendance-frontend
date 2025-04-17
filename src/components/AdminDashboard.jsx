@@ -24,7 +24,7 @@ function AdminDashboard() {
 
   const fetchAttendance = async () => {
     try {
-      const res = await axios.get("http://127.0.0.1:5000/attendance", {
+      const res = await axios.get("${BASE_URL}/attendance", {
         withCredentials: true
       });
       setAttendance(res.data);

@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import WebcamCapture from './WebcamCapture';
 import { recognizeFace } from '../components/services/api';  // Correct path
+import { BASE_URL } from '../config'; // Adjust path if needed
 
 const FaceRecognition = () => {
   const [result, setResult] = useState(null);

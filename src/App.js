@@ -5,6 +5,8 @@ import WebcamCapture from './components/WebcamCapture';
 import AdminDashboard from './components/AdminDashboard';
 import AdminLogin from './components/AdminLogin';
 import axios from 'axios';
+import { BASE_URL } from '../config';  // use '../config' or './config' based on file location
+
 
 function App() {
   const [view, setView] = useState('recognize');
@@ -23,10 +25,7 @@ function App() {
 
     const cleanBase64 = imageData.replace(/^data:image\/\w+;base64,/, "");
 
-    axios
-      .post('http://127.0.0.1:5000/recognize', {
-        image: cleanBase64,
-      })
+    axios.post(`${BASE_URL}/recognize`, { image: cleanBase64 })
       .then((res) => {
         console.log("✅ Recognized:", res.data);
         alert(`✅ Welcome, ${res.data.name || "Unknown User"}`);
@@ -38,7 +37,7 @@ function App() {
   };
 
   const handleLogout = () => {
-    axios.post('http://127.0.0.1:5000/logout', {}, { withCredentials: true })
+    axios.post(`${BASE_URL}/logout`, {}, { withCredentials: true })
       .then(() => {
         setIsAdmin(false);
         localStorage.removeItem('isAdmin');
@@ -58,27 +57,17 @@ function App() {
         <h1 className="App-title">Facial + Iris Attendance</h1>
 
         <div className="mt-4">
-          <button onClick={() => setView('recognize')} className="btn mr-2">
-            Recognition
-          </button>
-          <button onClick={() => setView('admin')} className="btn">
-            Admin Panel
-          </button>
+          <button onClick={() => setView('recognize')} className="btn mr-2">Recognition</button>
+          <button onClick={() => setView('admin')} className="btn">Admin Panel</button>
           {isAdmin && (
-            <button onClick={handleLogout} className="btn ml-2 bg-red-600 hover:bg-red-700">
-              Logout
-            </button>
+            <button onClick={handleLogout} className="btn ml-2 bg-red-600 hover:bg-red-700">Logout</button>
           )}
         </div>
       </header>
 
       <div className="card">
         {view === 'admin' ? (
-          isAdmin ? (
-            <AdminDashboard />
-          ) : (
-            <AdminLogin onLoginSuccess={onLoginSuccess} />
-          )
+          isAdmin ? <AdminDashboard /> : <AdminLogin onLoginSuccess={onLoginSuccess} />
         ) : (
           <WebcamCapture onCapture={handleCapture} />
         )}

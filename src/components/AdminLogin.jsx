@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
+import { BASE_URL } from '../config';  // use '../config' or './config' based on file location
 
 const AdminLogin = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
@@ -10,7 +11,7 @@ const AdminLogin = ({ onLoginSuccess }) => {
     setError('');
     try {
       const response = await axios.post(
-        'http://127.0.0.1:5000/login',
+        '${BASE_URL}/login',
         { username, password },
         { withCredentials: true }
       );

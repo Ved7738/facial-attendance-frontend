@@ -1,6 +1,7 @@
 import React, { useRef, useState } from 'react';
 import Webcam from 'react-webcam';
 import axios from 'axios';
+import { BASE_URL } from '../config';  // use '../config' or './config' based on file location
 
 const WebcamCapture = () => {
   const webcamRef = useRef(null);
@@ -19,7 +20,7 @@ const WebcamCapture = () => {
     setLoading(true);
 
     try {
-      const res = await axios.post('http://127.0.0.1:5000/recognize', {
+      const res = await axios.post('${BASE_URL}/recognize', {
         image: cleanBase64,
       });
 
