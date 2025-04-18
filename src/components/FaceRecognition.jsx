@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 import WebcamCapture from './WebcamCapture';
-import { recognizeFace } from '../components/services/api';  // Correct path
-import { BASE_URL } from '../config'; // Adjust path if needed
+import axios from 'axios';
+import { BASE_URL } from '../config';
 
 const FaceRecognition = () => {
   const [result, setResult] = useState(null);
@@ -9,13 +9,16 @@ const FaceRecognition = () => {
 
   const handleCapture = async (imageBase64) => {
     try {
-      const base64Only = imageBase64.split(',')[1]; // Remove prefix
-      const response = await recognizeFace(base64Only);
+      const base64Only = imageBase64.split(',')[1]; // remove the prefix
+      const response = await axios.post(`${BASE_URL}/recognize`, {
+        image: base64Only
+      });
+
       setResult(response.data);
       setError("");
     } catch (err) {
       console.error(err);
-      setError("Recognition failed.");
+      setError("❌ Recognition failed.");
     }
   };
 
