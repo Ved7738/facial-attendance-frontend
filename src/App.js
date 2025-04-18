@@ -5,7 +5,8 @@ import WebcamCapture from './components/WebcamCapture';
 import AdminDashboard from './components/AdminDashboard';
 import AdminLogin from './components/AdminLogin';
 import axios from 'axios';
-import { BASE_URL } from './config';
+import { BASE_URL } from './components/config';
+
 
 function App() {
   const [view, setView] = useState('recognize');

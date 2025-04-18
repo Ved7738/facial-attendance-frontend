@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import { BASE_URL } from '../config';
+import { BASE_URL } from './config';
 
 const AdminLogin = ({ onLoginSuccess }) => {
   const [username, setUsername] = useState('');
