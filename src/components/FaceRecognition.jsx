@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import WebcamCapture from './WebcamCapture';
+import WebcamCapture from '../WebcamCapture';
 import axios from 'axios';
 import { BASE_URL } from '../config';
 
