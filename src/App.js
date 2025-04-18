@@ -6,7 +6,7 @@ import AdminDashboard from './components/AdminDashboard';
 import AdminLogin from './components/AdminLogin';
 import axios from 'axios';
 import { BASE_URL } from './components/config';
-
+import './index.css';
 
 function App() {
   const [view, setView] = useState('recognize');
